@@ -4,7 +4,7 @@ import { stringify } from 'querystring';
 import { router } from 'umi';
 
 import { fakeAccountLogin, getFakeCaptcha } from '@/services/login';
-import { setAuthority } from '@/utils/authority';
+// import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 
 export interface StateType {
@@ -41,17 +41,17 @@ const Model: LoginModelType = {
   effects: {
     *login({ payload }, { call, put }) {
       // call函数应该是调用接口
-      const response = yield call(fakeAccountLogin, payload);
-      console.log(response);
+      const { data: response } = yield call(fakeAccountLogin, payload);
       // put函数是用来发送action的
       yield put({
         type: 'changeLoginStatus',
         payload: response,
       });
       // Login successfully
-      if (response.status === 'ok') {
+      if (response.code === 0) {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
+        console.log(urlParams, params);
         let { redirect } = params as { redirect: string };
         if (redirect) {
           const redirectUrlParams = new URL(redirect);
@@ -89,7 +89,6 @@ const Model: LoginModelType = {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      console.log(state, payload);
       // setAuthority(payload.currentAuthority);
       return {
         ...state,

@@ -9,10 +9,6 @@ export interface LoginParamsType {
 }
 
 export async function fakeAccountLogin(params: LoginParamsType) {
-  // return api('/manage/manage', {
-  //   method: 'POST',
-  //   data: params,
-  // });
   return api.post('/pc/manage/manage', {
     data: params,
   });
