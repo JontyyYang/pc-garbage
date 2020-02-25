@@ -33,9 +33,16 @@ const Model: LoginModelType = {
     status: undefined,
   },
 
+  //   effect：
+  // 当put一个action后，reducer中就会计算新的state并返回，注意： put 也是阻塞 effect。
+  // call(fn, …args)：
+  // 调用其他函数的函数，它命令 middleware 来调用fn 函数， args为函数的参数
+  // 注意： fn 函数可以是一个 Generator 函数，也可以是一个返回 Promise 的普通函数，call 函数也是阻塞 effect。
   effects: {
     *login({ payload }, { call, put }) {
+      // call函数应该是调用接口
       const response = yield call(fakeAccountLogin, payload);
+      // put函数是用来发送action的
       yield put({
         type: 'changeLoginStatus',
         payload: response,

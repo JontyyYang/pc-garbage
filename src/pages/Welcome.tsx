@@ -2,7 +2,6 @@ import React from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import { Card, Typography, Alert } from 'antd';
-
 import styles from './Welcome.less';
 
 const CodePreview: React.FC<{}> = ({ children }) => (
@@ -12,9 +11,7 @@ const CodePreview: React.FC<{}> = ({ children }) => (
     </code>
   </pre>
 );
-//  学习ts
 
-//
 export default (): React.ReactNode => (
   <PageHeaderWrapper>
     <Card>
@@ -53,7 +50,12 @@ export default (): React.ReactNode => (
       </Typography.Text>
       <CodePreview> npm run fetch:blocks</CodePreview>
     </Card>
-    <p style={{ textAlign: 'center', marginTop: 24 }}>
+    <p
+      style={{
+        textAlign: 'center',
+        marginTop: 24,
+      }}
+    >
       Want to add more pages? Please refer to{' '}
       <a href="https://pro.ant.design/docs/block-cn" target="_blank" rel="noopener noreferrer">
         use block

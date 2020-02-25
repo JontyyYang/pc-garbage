@@ -114,6 +114,15 @@ export default {
               component: './Admin',
               authority: ['admin'],
             },
+            //  这里添加不光可以加路由， 还可以在侧边栏增加导航
+            // {
+            //   path: '/test',
+            //   name: 'test',
+            //   icon: 'crown',
+            //   component: './Admin',
+            //   authority: ['admin'],
+            // },
+            //
             {
               component: './404',
             },

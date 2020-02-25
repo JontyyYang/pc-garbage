@@ -69,21 +69,21 @@ const defaultFooterDom = (
     copyright="NanTong University 苏ICP备05007127号"
     links={[
       {
-        key: 'Ant Design Pro',
-        title: 'Ant Design Pro',
+        key: '马上到资源回收中心',
+        title: '马上到资源回收中心',
         href: 'https://pro.ant.design',
         blankTarget: true,
       },
       {
         key: 'github',
         title: <Icon type="github" />,
-        href: 'https://github.com/ant-design/ant-design-pro',
+        href: 'https://github.com/YJD199798/pc-garbage',
         blankTarget: true,
       },
       {
-        key: 'Ant Design',
-        title: 'Ant Design',
-        href: 'https://ant.design',
+        key: 'yuque',
+        title: '个人博客',
+        href: 'https://www.yuque.com/jontyy',
         blankTarget: true,
       },
     ]}
