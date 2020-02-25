@@ -60,4 +60,4 @@ export default {
   iconfontUrl: '',
 } as DefaultSettings;
 
-export const baseUrl: string = 'http://127.0.0.1:7001/';
+export const baseUrl: string = 'http://127.0.0.1:7001';

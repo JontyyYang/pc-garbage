@@ -1,13 +1,14 @@
-import request from '@/utils/request';
+// import request from '@/utils/request';
+import api from '@/utils/api';
 
 export async function query(): Promise<any> {
-  return request('/api/users');
+  return api('/api/users');
 }
 
 export async function queryCurrent(): Promise<any> {
-  return request('/api/currentUser');
+  return api('/api/currentUser');
 }
 
 export async function queryNotices(): Promise<any> {
-  return request('/api/notices');
+  return api('/api/notices');
 }

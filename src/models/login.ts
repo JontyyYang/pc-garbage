@@ -42,6 +42,7 @@ const Model: LoginModelType = {
     *login({ payload }, { call, put }) {
       // call函数应该是调用接口
       const response = yield call(fakeAccountLogin, payload);
+      console.log(response);
       // put函数是用来发送action的
       yield put({
         type: 'changeLoginStatus',
@@ -88,7 +89,8 @@ const Model: LoginModelType = {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
+      console.log(state, payload);
+      // setAuthority(payload.currentAuthority);
       return {
         ...state,
         status: payload.status,
