@@ -3,6 +3,7 @@
  * @Date: 2020-01-22 10:03:31
  * @Description:封装axios，设置默认端口，记得开发要下载谷歌跨域插件，要不然不行
  */
+import { message } from 'antd';
 
 const axios = require('axios');
 
@@ -40,6 +41,9 @@ api.interceptors.response.use(
       const { origin } = window.location;
       // window.location.href = 'http://127.0.0.1:8080/#/login';
       window.location.href = `${origin}#/login`;
+    }
+    if (response.data.code === (-1 || -100)) {
+      message.info(`出错啦${''.padEnd(10, ' ')}${response.data.message} `, 3);
     }
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
