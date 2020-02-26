@@ -51,7 +51,7 @@ const UserLayout: React.FC<UserLayoutProps> = props => {
             <div className={styles.header}>
               <Link to="/">
                 <img alt="logo" className={styles.logo} src={logo} />
-                <span className={styles.title}>马上到资源回收中心</span>
+                <span className={styles.title}>马上达资源回收中心</span>
               </Link>
             </div>
             <div className={styles.desc}>做最快捷最方便的居民资源回收中心</div>
@@ -62,8 +62,8 @@ const UserLayout: React.FC<UserLayoutProps> = props => {
           copyright="NanTong University 苏ICP备05007127号"
           links={[
             {
-              key: '马上到资源回收中心',
-              title: '马上到资源回收中心',
+              key: '马上达资源回收中心',
+              title: '马上达资源回收中心',
               href: 'https://pro.ant.design',
               blankTarget: true,
             },

@@ -16,6 +16,8 @@ import { Dispatch } from 'redux';
 import { connect } from 'dva';
 import { Icon, Result, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
+// 需要在tsconfig中增加"noImplicitAny": false，否则报错
+import cookie from 'js-cookie';
 
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
@@ -69,8 +71,8 @@ const defaultFooterDom = (
     copyright="NanTong University 苏ICP备05007127号"
     links={[
       {
-        key: '马上到资源回收中心',
-        title: '马上到资源回收中心',
+        key: '马上达资源回收中心',
+        title: '马上达资源回收中心',
         href: 'https://pro.ant.design',
         blankTarget: true,
       },
@@ -116,15 +118,16 @@ const footerRender: BasicLayoutProps['footerRender'] = () => {
 };
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
-  const { dispatch, children, settings, location = { pathname: '/' } } = props;
+  const { dispatch, children, settings, location = { pathname: '/' } } = props,
+    manageInfo = JSON.parse(cookie.get('manageInfo'));
   /**
    * constructor
    */
-
   useEffect(() => {
     if (dispatch) {
       dispatch({
         type: 'user/fetchCurrent',
+        payload: manageInfo.manage_phone,
       });
     }
   }, []);
@@ -192,7 +195,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   );
 };
 
-export default connect(({ global, settings }: ConnectState) => ({
+export default connect(({ global, settings, login }: ConnectState) => ({
   collapsed: global.collapsed,
   settings,
 }))(BasicLayout);

@@ -30,3 +30,13 @@
 -: feat
 
 1. 调通真实接口
+2. 利用 config 的 proxy 代理到本地
+
+## 2020-02-26
+
+-: feat
+
+1. 解决 authorized 权限问题
+2. 引入 jscookie
+3. 修改 title 和 favcion 图标
+4. 增加 tsconfig 配置

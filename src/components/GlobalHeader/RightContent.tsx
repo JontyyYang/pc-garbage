@@ -29,7 +29,7 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
         placeholder={formatMessage({
           id: 'component.globalHeader.search',
         })}
-        defaultValue="umi ui"
+        defaultValue="马上达站内搜索"
         dataSource={[
           formatMessage({
             id: 'component.globalHeader.search.example1',

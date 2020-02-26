@@ -4,13 +4,15 @@ import { stringify } from 'querystring';
 import { router } from 'umi';
 
 import { fakeAccountLogin, getFakeCaptcha } from '@/services/login';
-// import { setAuthority } from '@/utils/authority';
+import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 
 export interface StateType {
   status?: 'ok' | 'error';
   type?: string;
-  currentAuthority?: 'user' | 'guest' | 'admin';
+  code?: number;
+  data?: object;
+  message?: string;
 }
 
 export interface LoginModelType {
@@ -29,9 +31,7 @@ export interface LoginModelType {
 const Model: LoginModelType = {
   namespace: 'login',
 
-  state: {
-    status: undefined,
-  },
+  state: {},
 
   //   effect：
   // 当put一个action后，reducer中就会计算新的state并返回，注意： put 也是阻塞 effect。
@@ -51,7 +51,6 @@ const Model: LoginModelType = {
       if (response.code === 0) {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
-        console.log(urlParams, params);
         let { redirect } = params as { redirect: string };
         if (redirect) {
           const redirectUrlParams = new URL(redirect);
@@ -66,11 +65,18 @@ const Model: LoginModelType = {
           }
         }
         router.replace(redirect || '/');
+        // router.replace({
+        //   pathname: '/welcome',
+        //   search: stringify({
+        //     redirect: window.location.href,
+        //   }),
+        // });
       }
     },
 
     *getCaptcha({ payload }, { call }) {
-      yield call(getFakeCaptcha, payload);
+      const data = yield call(getFakeCaptcha, payload);
+      return data;
     },
 
     logout() {
@@ -89,11 +95,11 @@ const Model: LoginModelType = {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      // setAuthority(payload.currentAuthority);
+      const data = payload.data;
+      setAuthority(data.currentAuthority);
       return {
         ...state,
-        status: payload.status,
-        type: payload.type,
+        data,
       };
     },
   },

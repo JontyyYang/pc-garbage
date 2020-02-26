@@ -55,7 +55,7 @@ export default {
   menu: {
     locale: true,
   },
-  title: '马上到',
+  title: '马上达',
   pwa: false,
   iconfontUrl: '',
 } as DefaultSettings;

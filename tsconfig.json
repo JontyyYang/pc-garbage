@@ -19,7 +19,8 @@
     "strict": true,
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "noImplicitAny": false,
   },
   "exclude": [
     "node_modules",

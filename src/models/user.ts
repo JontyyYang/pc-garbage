@@ -1,11 +1,16 @@
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
+import cookie from 'js-cookie';
 
-import { queryCurrent, query as queryUsers } from '@/services/user';
+// 不从mook走了
+// import { queryCurrent, query as queryUsers } from '@/services/user';
+import { query as queryUsers } from '@/services/user';
 
 export interface CurrentUser {
   avatar?: string;
-  name?: string;
+  manage_name?: string;
+  manage_id?: number;
+  // 注释的都是原来mook的数据类型
   title?: string;
   group?: string;
   signature?: string;
@@ -42,6 +47,8 @@ const UserModel: UserModelType = {
   },
 
   effects: {
+    // effects 是通过接口对外暴露的，利用dispatch使用
+    // call是调用接口， put是调用reduce
     *fetch(_, { call, put }) {
       const response = yield call(queryUsers);
       yield put({
@@ -49,8 +56,9 @@ const UserModel: UserModelType = {
         payload: response,
       });
     },
-    *fetchCurrent(_, { call, put }) {
-      const response = yield call(queryCurrent);
+    *fetchCurrent({ payload }, { call, put }) {
+      // const response = yield call(queryCurrent, payload);
+      const response = { data: JSON.parse(cookie.get('manageInfo')) };
       yield put({
         type: 'saveCurrentUser',
         payload: response,
@@ -59,10 +67,12 @@ const UserModel: UserModelType = {
   },
 
   reducers: {
+    // reducers返回的是一个新的state，因为为了避免影响其他的state，所以必须有...state
+    // 是通过effect里面触发
     saveCurrentUser(state, action) {
       return {
         ...state,
-        currentUser: action.payload || {},
+        currentUser: action.payload.data || {},
       };
     },
     changeNotifyCount(
