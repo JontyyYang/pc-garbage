@@ -61,3 +61,7 @@ yarn test
    12. tests # 测试工具
    13. README.md
    14. package.json
+
+# Tips
+
+1. 不要随便升级依赖， 升级了半天，最后回滚了， 日。疯了
