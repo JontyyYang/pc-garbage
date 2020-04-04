@@ -4,6 +4,7 @@ export default {
   'menu.home': '首页',
   'menu.admin': '管理页',
   'menu.newsList': '新闻页',
+  'menu.swiper': '广告页',
   'menu.login': '登录',
   'menu.register': '注册',
   'menu.register.result': '注册结果',

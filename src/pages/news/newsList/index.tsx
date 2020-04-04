@@ -36,7 +36,7 @@ interface newsListProps {
   newsList: newsListType;
 }
 
-class newsList extends Component<newsListProps, State> {
+class NewsList extends Component<newsListProps, State> {
   state: State = {
     texttips: ['累计编写新闻', '累计发布新闻'],
     loading: false,
@@ -262,5 +262,6 @@ class newsList extends Component<newsListProps, State> {
 
 export default connect(({ newsList }: ConnectState) => ({
   newsList,
-}))(newsList);
+}))(NewsList);
+// 最下面的这个  是组件名
 /* eslint-enable */

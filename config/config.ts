@@ -121,7 +121,13 @@ export default {
               component: './news/newsList',
               authority: ['admin', 'user'],
             },
-            //
+            {
+              path: '/swiper',
+              name: 'swiper',
+              icon: 'BgColorsOutlined',
+              component: './swiper',
+              authority: ['admin', 'user'],
+            },
             {
               component: './404',
             },

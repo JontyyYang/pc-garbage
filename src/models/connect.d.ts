@@ -6,6 +6,7 @@ import { DefaultSettings as SettingModelState } from '../../config/defaultSettin
 import { UserModelState } from './user';
 import { StateType } from './login';
 import { newsListType } from './newsList';
+import { SwiperModelType } from './swiper';
 
 export { GlobalModelState, SettingModelState, UserModelState };
 
@@ -19,6 +20,7 @@ export interface Loading {
     user?: boolean;
     login?: boolean;
     newsList?: boolean;
+    Swiper?: boolean;
   };
 }
 
@@ -29,6 +31,7 @@ export interface ConnectState {
   user: UserModelState;
   login: StateType;
   newsList: newsListType;
+  swiper: SwiperModelType;
 }
 
 export interface Route extends MenuDataItem {
