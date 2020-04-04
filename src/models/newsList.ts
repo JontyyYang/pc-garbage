@@ -44,6 +44,7 @@ const Model: newsListModelType = {
   effects: {
     *getNewsList({ payload }, { call, put }) {
       const result = yield call(getNews, payload);
+
       yield put({
         type: 'changeNewsList',
         payload: result,
@@ -52,15 +53,19 @@ const Model: newsListModelType = {
 
     *addNewsList({ payload }, { call }) {
       const result = yield call(addNews, payload);
+
       return result;
     },
+
     *deleteNewsList({ payload }, { call, put }) {
       const result = yield call(deleteNews, payload);
+
       if (result.data.code === 0) {
         yield put({
           type: 'changeNewsList',
           payload: result,
         });
+
         message.info('删除新闻成功');
       }
     },

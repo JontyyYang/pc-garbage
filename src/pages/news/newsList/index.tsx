@@ -7,7 +7,9 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { newsListType } from '@/models/newsList';
-import WrappedHorizontalLoginForm from './form/form';
+import { formatTime } from '@/utils/date-transform';
+
+import NewsListForm from './form/form';
 import styles from './index.less';
 
 // 这里定义state的状态
@@ -28,7 +30,7 @@ interface State {
   };
 }
 
-// 这里定义props状态 ，注意，也就是下面 connectState中用刀的
+// 这里定义props状态 ，注意，也就是下面 connectState中用到的
 interface newsListProps {
   dispatch?: Dispatch<AnyAction>;
   newsList: newsListType;
@@ -87,6 +89,7 @@ class newsList extends Component<newsListProps, State> {
         type: 'newsList/addNewsList',
         payload: params,
       });
+
       if (status.data.code === 0) {
         this.setState({ loading: false, visible: false });
         message.info('添加成功');
@@ -129,18 +132,18 @@ class newsList extends Component<newsListProps, State> {
       }));
   };
 
-  edit = record => {
-    alert(record);
-    // const { news_title, news_writename, news_picurl, news_info } = record;
-    // const title = { ...this.state.title, ...news_title };
-    // this.setState({
-    //   visible: true,
-    //   title: { value: news_title },
-    //   value: news_info,
-    //   picurl: { value: news_picurl },
-    //   writename: { value: news_writename },
-    // });
-  };
+  // edit = record => {
+  //   console.log(JSON.stringify(record));
+  //   const { news_title, news_writename, news_picurl, news_info } = record;
+  //   const title = { ...this.state.title, ...news_title };
+  //   this.setState({
+  //     visible: true,
+  //     title: { value: news_title },
+  //     value: news_info,
+  //     picurl: { value: news_picurl },
+  //     writename: { value: news_writename },
+  //   });
+  // };
 
   render() {
     const columns = [
@@ -148,7 +151,6 @@ class newsList extends Component<newsListProps, State> {
         title: '标题',
         dataIndex: 'news_title',
         key: 'news_title',
-        // render: text => <a>{text}</a>,
       },
       {
         title: '作者',
@@ -165,6 +167,7 @@ class newsList extends Component<newsListProps, State> {
         title: '时间',
         dataIndex: 'news_time',
         key: 'news_time',
+        render: time => <p>{formatTime(time)}</p>,
       },
       {
         title: '内容',
@@ -179,9 +182,9 @@ class newsList extends Component<newsListProps, State> {
           const { id } = record;
           return (
             <span>
-              <a style={{ marginRight: 16 }} onClick={() => this.edit(record)}>
+              {/* <a style={{ marginRight: 16 }} onClick={() => this.edit(record)}>
                 编辑
-              </a>
+              </a> */}
               <a style={{ marginRight: 16 }} onClick={() => this.onDelete(id)}>
                 删除
               </a>
@@ -242,7 +245,7 @@ class newsList extends Component<newsListProps, State> {
                     </Button>,
                   ]}
                 >
-                  <WrappedHorizontalLoginForm onGetData={this.onGetData} />
+                  <NewsListForm onGetData={this.onGetData} />
                   <Card title="富文本编辑器">
                     <ReactQuill value={this.state.value} onChange={this.handleChange} />
                   </Card>
@@ -257,7 +260,6 @@ class newsList extends Component<newsListProps, State> {
   }
 }
 
-/* eslint-disable */
 export default connect(({ newsList }: ConnectState) => ({
   newsList,
 }))(newsList);

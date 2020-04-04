@@ -89,11 +89,11 @@ class HorizontalLoginForm extends Component<textInfoProps> {
   }
 }
 
-const WrappedHorizontalLoginForm = Form.create<textInfoProps>({
+const NewsListForm = Form.create<textInfoProps>({
   name: 'horizontal_login',
   onFieldsChange(props, changedFields) {
     (props as any).onGetData(changedFields);
   },
 })(HorizontalLoginForm);
 
-export default WrappedHorizontalLoginForm;
+export default NewsListForm;
