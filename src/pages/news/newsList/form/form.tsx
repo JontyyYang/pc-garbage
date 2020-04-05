@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Form, Icon, Input } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 
-// interface hor {
-//   form: any;
-// }
 interface textInfoProps {
   form: FormComponentProps['form'];
   onGetData?: (changedFields: object) => void;

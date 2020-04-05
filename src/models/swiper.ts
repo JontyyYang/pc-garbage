@@ -1,6 +1,6 @@
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
-import { getSwiper } from '@/services/swiper';
+import { getSwiper, addSwiper, deleteSwiper, editSwiper } from '@/services/swiper';
 
 export interface SwiperModelType {
   namespace: string;
@@ -10,6 +10,9 @@ export interface SwiperModelType {
   }[];
   effects: {
     getSwiperList: Effect;
+    addSwiperList: Effect;
+    deleteSwiper: Effect;
+    editSwiperList: Effect;
   };
   reducers: {
     initSwiper: Reducer;
@@ -30,6 +33,21 @@ const SwiperModel: SwiperModelType = {
         type: 'initSwiper',
         payload: result.data,
       });
+      return result;
+    },
+
+    *addSwiperList({ payload }, { call, put }) {
+      const result = yield call(addSwiper, payload);
+      return result;
+    },
+
+    *deleteSwiper({ payload }, { call, put }) {
+      const result = yield call(deleteSwiper, payload);
+      return result;
+    },
+
+    *editSwiperList({ payload }, { call, put }) {
+      const result = yield call(editSwiper, payload);
       return result;
     },
   },
