@@ -7,6 +7,8 @@ import { UserModelState } from './user';
 import { StateType } from './login';
 import { newsListType } from './newsList';
 import { SwiperModelType } from './swiper';
+import { SwiperModelType } from './swiper';
+import { goodsType } from './goods';
 
 export { GlobalModelState, SettingModelState, UserModelState };
 
@@ -21,6 +23,7 @@ export interface Loading {
     login?: boolean;
     newsList?: boolean;
     Swiper?: boolean;
+    good?: boolean;
   };
 }
 
@@ -32,6 +35,7 @@ export interface ConnectState {
   login: StateType;
   newsList: newsListType;
   swiper: SwiperModelType;
+  good: goodsType;
 }
 
 export interface Route extends MenuDataItem {

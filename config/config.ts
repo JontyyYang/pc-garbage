@@ -126,11 +126,25 @@ export default {
               component: './swiper',
               authority: ['admin', 'user'],
             },
+
             {
               name: 'goods',
               icon: 'smile',
               path: '/goods',
-              component: './goods',
+              routes: [
+                {
+                  name: 'goods',
+                  icon: 'smile',
+                  path: '/goods/goods',
+                  component: './goods',
+                },
+                {
+                  name: 'addGoods',
+                  icon: 'smile',
+                  path: '/goods/addgoods',
+                  component: './goods/addGoods',
+                },
+              ],
             },
             {
               component: './404',
