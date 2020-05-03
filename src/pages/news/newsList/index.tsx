@@ -132,19 +132,6 @@ class NewsList extends Component<newsListProps, State> {
       }));
   };
 
-  // edit = record => {
-  //   console.log(JSON.stringify(record));
-  //   const { news_title, news_writename, news_picurl, news_info } = record;
-  //   const title = { ...this.state.title, ...news_title };
-  //   this.setState({
-  //     visible: true,
-  //     title: { value: news_title },
-  //     value: news_info,
-  //     picurl: { value: news_picurl },
-  //     writename: { value: news_writename },
-  //   });
-  // };
-
   render() {
     const columns = [
       {

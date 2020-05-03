@@ -37,10 +37,7 @@ const SwiperModel: SwiperModelType = {
     },
 
     *addSwiperList({ payload }, { call }) {
-      console.log(1);
-
       const result = yield call(addSwiper, payload);
-      console.log(result);
       return result;
     },
 

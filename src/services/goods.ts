@@ -12,3 +12,7 @@ export async function addGoods(params: GoodsType) {
     data: params,
   });
 }
+
+export async function getGoods() {
+  return api.get('/pc/good/getGoods');
+}

@@ -13,7 +13,7 @@ import styles from './style.less';
 const { Paragraph } = Typography;
 
 interface GoodsProps {
-  goods: StateType;
+  good: any;
   dispatch: Dispatch<any>;
   loading: boolean;
 }
@@ -26,43 +26,30 @@ interface GoodsState {
 class Goods extends Component<GoodsProps, GoodsState> {
   componentDidMount() {
     const { dispatch } = this.props;
+    // dispatch({
+    //   type: 'goods/fetch',
+    //   payload: {
+    //     count: 8,
+    //   },
+    // });
+
     dispatch({
-      type: 'goods/fetch',
-      payload: {
-        count: 8,
-      },
+      type: 'good/getGoods',
     });
   }
 
   render() {
-    const {
-      goods: { list },
-      loading,
-    } = this.props;
+    const { good, loading } = this.props;
+    const data = good.data || [];
+    console.log(data);
 
     const content = (
       <div className={styles.pageHeaderContent}>
-        <p>
-          段落示意：蚂蚁金服务设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，
-          提供跨越设计与开发的体验解决方案。
-        </p>
-        <div className={styles.contentLink}>
-          <a>
-            <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg" />{' '}
-            快速开始
-          </a>
-          <a>
-            <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg" />{' '}
-            产品简介
-          </a>
-          <a>
-            <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg" />{' '}
-            产品文档
-          </a>
-        </div>
+        <p>你可以在当前页查看所有的商品信息哦， 并相应的操作这些商品</p>
       </div>
     );
 
+    // 右侧图标信息，很不错哦
     const extraContent = (
       <div className={styles.extraImg}>
         <img
@@ -71,30 +58,31 @@ class Goods extends Component<GoodsProps, GoodsState> {
         />
       </div>
     );
-    const nullData: Partial<CardListItemDataType> = {};
+
     return (
       <PageHeaderWrapper content={content} extraContent={extraContent}>
         <div className={styles.cardList}>
-          <List<Partial<CardListItemDataType>>
-            rowKey="id"
+          <List
+            rowKey="good_id"
             loading={loading}
             grid={{ gutter: 24, lg: 3, md: 2, sm: 1, xs: 1 }}
-            dataSource={[nullData, ...list]}
+            dataSource={[...data, []]}
             renderItem={item => {
-              if (item && item.id) {
+              if (item && item.good_id) {
                 return (
-                  <List.Item key={item.id}>
+                  <List.Item key={item.good_id}>
                     <Card
                       hoverable
                       className={styles.card}
-                      actions={[<a key="option1">操作一</a>, <a key="option2">操作二</a>]}
+                      actions={[<a key="option1">删除</a>, <a key="option2">编辑</a>]}
                     >
                       <Card.Meta
-                        avatar={<img alt="" className={styles.cardAvatar} src={item.avatar} />}
-                        title={<a>{item.title}</a>}
+                        avatar={<img alt="" className={styles.cardAvatar} src={item.good_img} />}
+                        title={<a>{item.good_name}</a>}
                         description={
                           <Paragraph className={styles.item} ellipsis={{ rows: 3 }}>
-                            {item.description}
+                            <p>介绍：{item.good_info}</p>
+                            <p>价钱：{item.good_price}</p>
                           </Paragraph>
                         }
                       />
@@ -105,7 +93,7 @@ class Goods extends Component<GoodsProps, GoodsState> {
               return (
                 <List.Item>
                   <Button type="dashed" className={styles.newButton}>
-                    <PlusOutlined /> 新增产品
+                    <PlusOutlined /> 新增商品
                   </Button>
                 </List.Item>
               );
@@ -121,13 +109,16 @@ export default connect(
   ({
     goods,
     loading,
+    good,
   }: {
     goods: StateType;
     loading: {
       models: { [key: string]: boolean };
     };
+    good: Array;
   }) => ({
     goods,
     loading: loading.models.goods,
+    good,
   }),
 )(Goods);

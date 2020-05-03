@@ -1,54 +1,57 @@
-// import { Reducer } from 'redux';
-
+import { Reducer } from 'redux';
 import { Effect } from 'dva';
-import { addGoods } from '@/services/goods';
-
-import { message } from 'antd';
+import { addGoods, getGoods } from '@/services/goods';
+// import { message } from 'antd';
 
 export interface goodsType {
   goodsName: string;
   goodsImg: string;
   goodsNumL: string;
   goodsPrice: string;
+  goodsInfo: string;
 }
 
 export interface goodsModelType {
   namespace: string;
-  state: goodsType;
+  state: goodsType[];
   effects: {
     addGoods: Effect;
+    getGoods: Effect;
   };
-  // reducers: {
-  //   changeNewsList: Reducer<goodsType>;
-  // };
+  reducers: {
+    changeGoods: Reducer<goodsType>;
+  };
 }
 
 const Model: goodsModelType = {
   namespace: 'good',
 
-  state: {
-    goodsName: '',
-    goodsImg: '',
-    goodsNumL: '',
-    goodsPrice: '',
-  },
+  state: [],
 
   effects: {
     *addGoods({ payload }, { call }) {
-      console.log(payload);
       const result = yield call(addGoods, payload);
 
       return result;
     },
+
+    *getGoods({ payload }, { call, put }) {
+      const result = yield call(getGoods);
+      yield put({
+        type: 'changeGoods',
+        payload: result,
+      });
+      return result;
+    },
   },
 
-  // reducers: {
-  // changeNewsList(state, { payload }) {
-  //   return {
-  //     ...state,
-  //     ...{ newsList: payload.data },
-  //   };
-  // },
-  // },
+  reducers: {
+    changeGoods(state, { payload }) {
+      return {
+        ...state,
+        ...payload.data,
+      };
+    },
+  },
 };
 export default Model;

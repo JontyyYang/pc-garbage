@@ -2,7 +2,7 @@ import { connect } from 'dva';
 import { Dispatch } from 'redux';
 import React, { Component } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import { ConnectState } from '@/models/connect';
 
@@ -28,9 +28,9 @@ class AddGoods extends Component<AddGoodsProps> {
   handleSubmit = async e => {
     e.preventDefault();
     const params = await this.props.form.validateFields((err, values) => {
-      if (!err) {
+      if (err) {
         // eslint-disable-next-line;
-        console.log('Received values of form: ', values);
+        message.info('表单有错误');
       }
     });
     const { dispatch } = this.props;
@@ -43,13 +43,10 @@ class AddGoods extends Component<AddGoodsProps> {
       });
     }
 
-    // if (status.data.code === 0) {
-    //   this.setState({ loading: false, visible: false });
-    //   message.info('添加成功');
-    //   dispatch({
-    //     type: 'newsList/getNewsList',
-    //   });
-    // }
+    if (status.data.code === 0) {
+      message.info('添加商品成功，可以继续添加新商品');
+      this.props.form.resetFields();
+    }
   };
 
   render() {
@@ -80,6 +77,12 @@ class AddGoods extends Component<AddGoodsProps> {
             {getFieldDecorator('goodsPrice', {
               rules: [{ required: true, message: '请输入商品价钱' }],
             })(<Input placeholder="goodsPrice" />)}
+          </Form.Item>
+
+          <Form.Item label="商品介绍" name="goodsInfo">
+            {getFieldDecorator('goodsInfo', {
+              rules: [{ required: true, message: '请输入商品介绍' }],
+            })(<Input placeholder="goodsInfo" />)}
           </Form.Item>
 
           <Form.Item {...tailLayout}>
