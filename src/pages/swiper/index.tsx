@@ -180,7 +180,7 @@ class Swiper extends React.Component<swiperPropsType> {
                   >
                     <AddSwiperForm
                       onGetData={this.onGetData}
-                      initValue={this.state.isEdit && this.state.initValue}
+                      initValue={this.state.isEdit ? this.state.initValue : ''}
                     />
                   </Modal>
                 </div>

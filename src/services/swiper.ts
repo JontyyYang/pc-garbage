@@ -1,7 +1,7 @@
 import api from '@/utils/api';
 
 export async function getSwiper() {
-  return api.get('/pc/swiper/img');
+  return api.get('/pc/swiper/getPcImg');
 }
 
 export async function addSwiper(params: string) {

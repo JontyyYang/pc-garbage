@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import { Form, Input } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 
-// const layout = {
-//   labelCol: { span: 8 },
-//   wrapperCol: { span: 16 },
-// };
-
 interface swiperProps {
   form: FormComponentProps['form'];
   onGetData?: (changedFields: object) => void;
@@ -18,6 +13,7 @@ class AddSwiperFormDetail extends Component<swiperProps> {
     super(props);
     this.state = {};
   }
+
   render() {
     const { getFieldDecorator, getFieldError, isFieldTouched } = this.props.form;
     const urlError = isFieldTouched('url') && getFieldError('url');

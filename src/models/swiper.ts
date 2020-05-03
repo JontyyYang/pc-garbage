@@ -36,17 +36,20 @@ const SwiperModel: SwiperModelType = {
       return result;
     },
 
-    *addSwiperList({ payload }, { call, put }) {
+    *addSwiperList({ payload }, { call }) {
+      console.log(1);
+
       const result = yield call(addSwiper, payload);
+      console.log(result);
       return result;
     },
 
-    *deleteSwiper({ payload }, { call, put }) {
+    *deleteSwiper({ payload }, { call }) {
       const result = yield call(deleteSwiper, payload);
       return result;
     },
 
-    *editSwiperList({ payload }, { call, put }) {
+    *editSwiperList({ payload }, { call }) {
       const result = yield call(editSwiper, payload);
       return result;
     },
@@ -56,7 +59,7 @@ const SwiperModel: SwiperModelType = {
     initSwiper(state, { payload }) {
       return {
         ...state,
-        swiperList: payload.imgData,
+        swiperList: payload.data,
       };
     },
   },
