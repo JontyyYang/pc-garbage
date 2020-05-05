@@ -16,9 +16,9 @@ export async function fakeAccountLogin(params: LoginParamsType) {
 
 export async function getFakeCaptcha(mobile: string) {
   // return api.get('/pc/manage/getFakeCaptcha', {
-  //   params: {
-  //     mobile: mobile,
-  //   },
+  // params: {
+  //   mobile: mobile,
+  // },
   // });
   return api(`/api/login/captcha?mobile=${mobile}`);
 }

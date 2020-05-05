@@ -144,6 +144,10 @@ export default {
                   path: '/goods/addgoods',
                   component: './goods/addGoods',
                 },
+                {
+                  path: '/goods/editgoods/:id',
+                  component: './goods/editGoods',
+                },
               ],
             },
             {
